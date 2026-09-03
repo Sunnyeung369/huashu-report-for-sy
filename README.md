@@ -1,12 +1,12 @@
 # huashu-report
 
-做机构级研究报告的 Agent Skill。规范不是想出来的，是从 2026 年 42 份顶级机构报告的实物里反向拆出来的。
+做机构级研究报告的 Agent Skill。规范不是想出来的，是从 2026 年顶级机构报告的实物里反向拆出来的（下载到 42 个 PDF，进量化统计的是 41 份）。
 
 装上之后，你的 agent 做行业报告、白皮书、年度调研、数据洞察和 arXiv 论文时，会按研究员 / 编辑 / 信息设计师 / 数据可视化师四个角色依次工作，而不是把搜到的资料码成一个文档。
 
 ## 为什么会有这个 skill
 
-2026 年 8 月我把能下载到的顶级机构 AI 报告全下了一遍——Stanford HAI、McKinsey、BCG、OpenAI、Anthropic、PwC、Deloitte、World Bank、Reuters Institute 等等，42 份 PDF。原本只是想找选题弹药，读到一半发现更值钱的东西在版式和行文里：这些机构在结构、口径标注、图表标题、配色上有一套高度一致的做法，而 AI 默认写出来的「报告」全不长这样。
+2026 年 8 月我把能下载到的顶级机构 AI 报告全下了一遍——Stanford HAI、McKinsey、BCG、OpenAI、Anthropic、PwC、Deloitte、World Bank、Reuters Institute 等等，42 个 PDF（世行 WDR 的概览册与正文是同一份报告的两个文件，量化统计按 41 份算）。原本只是想找选题弹药，读到一半发现更值钱的东西在版式和行文里：这些机构在结构、口径标注、图表标题、配色上有一套高度一致的做法，而 AI 默认写出来的「报告」全不长这样。
 
 于是把这批实物拆了，规范落成这个 skill。
 
@@ -44,7 +44,7 @@ references/
   视觉方向库.md        配色与风格方向
   图表模式库.md        8 种图型各自适用于比什么
   生产流水线.md        三文件架构（数据表 / 生成器 / 渲染器）+ 8 个具体的坑
-  实证基线.md          42 份报告的量化基线，规范的出处
+  实证基线.md          41 份报告的量化基线，规范的出处
   科普.md              面向无背景读者的报告原型（三幕骨架）
   论文.md              arXiv 论文原型（IMRaD / LaTeX）
 assets/
@@ -67,13 +67,13 @@ assets/
 
 - 单篇文章、PPT、演示稿不适用，那是别的活
 - 规范来自英文机构报告的实物，中文语境下的行文习惯需要自己再校一遍
-- 42 份的样本框偏 AI 与科技主题，其他领域的报告惯例可能不同
+- 41 份的样本框偏 AI 与科技主题，其他领域的报告惯例可能不同
 
 ---
 
 **English**
 
-`huashu-report` is an agent skill for producing institution-grade research reports — industry reports, white papers, annual surveys, data insights, and arXiv papers. The conventions were reverse-engineered from 42 real reports published in 2026 by Stanford HAI, McKinsey, BCG, OpenAI, Anthropic, PwC, Deloitte, the World Bank, and others, rather than written from intuition.
+`huashu-report` is an agent skill for producing institution-grade research reports — industry reports, white papers, annual surveys, data insights, and arXiv papers. The conventions were reverse-engineered from real reports published in 2026 (42 PDFs retrieved, 41 in the quantitative baseline) by Stanford HAI, McKinsey, BCG, OpenAI, Anthropic, PwC, Deloitte, the World Bank, and others, rather than written from intuition.
 
 Three findings that surprised me: body text is near-black in 40 of 41 reports (brand color occupies a median 2.8% of body characters); chart titles state the conclusion, not the topic; and every top-tier report devotes a section to arguing against itself.
 
