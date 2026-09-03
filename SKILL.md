@@ -1,6 +1,6 @@
 ---
 name: huashu-report
-description: 做机构级研究报告与学术论文——行业报告、白皮书、年度调研、数据洞察、arXiv论文。定结构、写发现、建图表视觉系统。规范提炼自2026年42份顶级机构报告实测（Stanford/BCG/McKinsey/OpenAI/Reuters等）。单篇文章、PPT不适用。
+description: 做机构级研究报告与学术论文——行业报告、白皮书、年度调研、数据洞察、arXiv论文，也含16:9咨询deck型报告（一页一结论）。定结构、写发现、建图表视觉系统。规范提炼自2026年顶级机构报告实测。单篇文章、纯演示PPT不适用（走design/slides）。
 ---
 
 # 报告写作
