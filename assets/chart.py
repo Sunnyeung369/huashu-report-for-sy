@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""内联 SVG 图表库。学术冷峻配色，无外部依赖，file:// 下可用。
+"""内联 SVG 图表库。无外部依赖，file:// 下可用。
+
+两套调色板，函数接口通用，颜色靠参数传进去：
+- 默认一套是方向 2「智库冷青」（TEAL / CLAY 那组，也是各函数的默认值）
+- NEWS_ 打头的另一套是方向 9「新闻数据版」，用法见它们上方的注释
 
 设计约束（来自 huashu-report/references/图表模式库.md）：
 - 分类色不超过 6 个；语义色只用两端
@@ -17,6 +21,45 @@ TEAL4 = "#cfe3e9"      # 极浅青
 CLAY = "#a4551f"       # 负向语义（暖棕）
 CLAY2 = "#c98f62"      # 负向浅
 SAND = "#e8dcc8"       # 中性
+
+# ── 方向 9「新闻数据版」调色板（晚点小数据）────────────────────────
+# 和上面那一组用法不同：这里**只有一个彩色在说话**，其余全部走灰。
+# 色值实测自晚点小数据的卡片，机制见 references/图表模式库.md 第 13 条。
+#
+#   背景 / 历史数据 → NEWS_GRAY（填充）、NEWS_LINE（线）
+#   焦点           → NEWS_FOCUS，覆盖在一条**真实存在的分界线**上
+#                    （时间前后 / 归类是否 / 实际与预计），不是「最重要的那条」
+#   对照           → NEWS_COUNTER，画变化前的那一侧
+#   第三个主体      → NEWS_THIRD，只在多主体对比时用，别和焦点色同图出现
+#
+# 典型调用（四个函数的接口都不用改，颜色是传进去的）：
+#
+#   hbar(data, colors=[NEWS_FOCUS if i == 0 else NEWS_GRAY
+#                      for i in range(len(data))])
+#   line_chart([("66.2%", vals, NEWS_THIRD)], xlabels)   # 末端标的是 name 位
+#   paired_bars(groups, colors=(NEWS_COUNTER, NEWS_FOCUS),
+#               series=("发布时价格", "调价后"))
+#   stacked_row(rows, seg_colors=[NEWS_FOCUS, NEWS_GRAY],
+#               legend=["HBM", "其他 DRAM"])
+#
+# line_chart 的末端标注本来就着系列色——把**数值**写进 series 的 name 位
+# 就是「末端直标数值」，不需要改代码。
+#
+# ⚠️ 能传进去的只有**数据系列的颜色**。轴标签、刻度、注释行在各函数里
+# 写死了 INK / MUTE / RULE（方向 2 那三个），换方向时它们不跟着变。
+# 肉眼差别很小（INK #231f20 vs NEWS_INK #3c3c3c），MUTE 略深一点
+# （#6b6b6b vs #8e8e8e）。要严格对齐就把上面那三个常量改掉，
+# 那是全局改动，会影响方向 2——所以别在同一个项目里混用两套。
+NEWS_BG      = "#f4f4f4"   # 纸色。⚠️ 只在整页都是这个底时用，
+                           #    报告正文页里的图表不要自己涂底
+NEWS_INK     = "#3c3c3c"   # 文字近黑
+NEWS_MUTE    = "#8e8e8e"   # 次级文字：轴标签、口径、来源
+NEWS_GRAY    = "#d9d9d9"   # 背景数据的填充（柱、堆叠条的其余段）
+NEWS_LINE    = "#3c3c3c"   # 背景数据的线。值和 NEWS_INK 相同、角色不同：
+                           # 让它退后的是不加粗、不画点，不是变浅
+NEWS_FOCUS   = "#d84532"   # 焦点砖红
+NEWS_COUNTER = "#21687d"   # 对照深青（变化前）
+NEWS_THIRD   = "#61a05b"   # 第三个对比主体
 
 FONT = "'Songti SC','Source Han Serif SC',Georgia,serif"
 SANS = "'PingFang SC','Helvetica Neue',Arial,sans-serif"
