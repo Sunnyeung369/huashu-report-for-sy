@@ -1,12 +1,12 @@
 # huashu-report
 
-做机构级研究报告的 Agent Skill。规范不是想出来的，是从 2026 年顶级机构报告的实物里反向拆出来的（下载到 42 个 PDF，进量化统计的是 41 份）。
+做机构级研究报告的 Agent Skill。规范不是想出来的，是从 2026 年顶级机构报告的实物里反向拆出来的（下载到 42 个 PDF，进量化统计的是 41 份；来源清单与解剖数据在 `corpus/`）。
 
 装上之后，你的 agent 做行业报告、白皮书、年度调研、数据洞察和 arXiv 论文时，会按研究员 / 编辑 / 信息设计师 / 数据可视化师四个角色依次工作，而不是把搜到的资料码成一个文档。
 
 ## 为什么会有这个 skill
 
-2026 年 8 月我把能下载到的顶级机构 AI 报告全下了一遍——Stanford HAI、McKinsey、BCG、OpenAI、Anthropic、PwC、Deloitte、World Bank、Reuters Institute 等等，42 个 PDF（世行 WDR 的概览册与正文是同一份报告的两个文件，量化统计按 41 份算）。原本只是想找选题弹药，读到一半发现更值钱的东西在版式和行文里：这些机构在结构、口径标注、图表标题、配色上有一套高度一致的做法，而 AI 默认写出来的「报告」全不长这样。
+2026 年 8 月我把能下载到的顶级机构 AI 报告全下了一遍——Stanford HAI、McKinsey、BCG、OpenAI、Anthropic、PwC、Deloitte、World Bank、Reuters Institute 等等，42 个 PDF（世行 WDR 的概览册与正文是同一份报告的两个文件，量化统计按 41 份算），后来又补入 2 份。原本只是想找选题弹药，读到一半发现更值钱的东西在版式和行文里：这些机构在结构、口径标注、图表标题、配色上有一套高度一致的做法，而 AI 默认写出来的「报告」全不长这样。
 
 于是把这批实物拆了，规范落成这个 skill。
 
@@ -51,9 +51,14 @@ assets/
   chart.py             8 种图型的内联 SVG 库，支持负值
   render.py            渲染 + 目录页码自动回填 + 机械自检
   base.css             基础样式
+corpus/
+  samples.md           43 份样本清单：机构、日期、页数、官方链接、许可状态
+  anatomy.json         41 份的量化解剖数据，实证基线的原始出处
 ```
 
 `assets/` 里那两个 Python 文件是最省时间的部分——直接复制改配置，不要重造。
+
+`corpus/` 是规范的出处，不是资料下载站——43 份报告的来源清单和量化结果在这里，报告实物一份不放（它们共约 234MB，而这是个要被人 clone 进 agent 的 skill 仓库）。想让量化基线可核查、或者给自己领域的报告立一套基线，都从那里的 `anatomy.json` 开始量——它覆盖全部 41 份，且只含量化结果不含原文。
 
 ## 一条判据
 
@@ -76,6 +81,8 @@ assets/
 `huashu-report` is an agent skill for producing institution-grade research reports — industry reports, white papers, annual surveys, data insights, and arXiv papers. The conventions were reverse-engineered from real reports published in 2026 (42 PDFs retrieved, 41 in the quantitative baseline) by Stanford HAI, McKinsey, BCG, OpenAI, Anthropic, PwC, Deloitte, the World Bank, and others, rather than written from intuition.
 
 Three findings that surprised me: body text is near-black in 40 of 41 reports (brand color occupies a median 2.8% of body characters); chart titles state the conclusion, not the topic; and every top-tier report devotes a section to arguing against itself.
+
+The source list and the measured anatomy of that corpus live in `corpus/` — official links and quantitative metrics only, no report files (the 43 reports run to ~234MB, and this is a skill repo people clone).
 
 Plain text plus three Python files, no external services, agent-agnostic. Clone into your agent's skills directory and it triggers on any request to produce a report.
 
