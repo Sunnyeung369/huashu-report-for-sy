@@ -16,7 +16,7 @@ class ChartSmokeTests(unittest.TestCase):
         self.assertIn('width="0.0"', svg)
 
     def test_negative_pair_is_rendered(self):
-        svg = chart.paired_bars([("x", [-2, 3])], ymin=-3, ymax=4)
+        svg = chart.paired_bars([("x", -2, 3)], ymin=-3, ymax=4)
         self.assertIn("-2", svg)
 
 if __name__ == "__main__":
